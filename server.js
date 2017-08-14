@@ -1,6 +1,6 @@
 const _ = require('lodash')
 const fs = require('fs')
-const { stringify, applyType, request } = require('./utils.js')
+const { stringify, applyType, request, getInfo } = require('./utils.js')
 
 const getSortedStocks = async query => {
 	const url = `http://finviz.com/screener.ashx?${query}`
@@ -39,18 +39,19 @@ const getEnrichedStockData = async () => {
 
 	const stocks = await getSortedStocks(query)
 
-	const originalData = await Promise.all(
-		stocks.map(async stock => await _.mapValues(await getDetails(stock)))
+	const originalData = await Promise.all(stocks.map(stock => getDetails(stock)))
+
+	const bestStocks = await Promise.all(
+		stocks.map(async stock => {
+			return await _.mapValues(await getDetails(stock), v => applyType(v))
+		})
 	)
 
-	const detailedStocks = await Promise.all(
-		stocks.map(
-			async stock =>
-				await _.mapValues(await getDetails(stock), v => applyType(v))
-		)
-	)
+	fs.writeFileSync('info.json', bestStocks.map(s => stringify(getInfo(s))))
 	fs.writeFileSync('originalData.json', stringify(originalData))
-	fs.writeFileSync('detailedStocks.json', stringify(detailedStocks))
+	fs.writeFileSync('bestStocks.json', stringify(bestStocks))
+
+	console.info(`data for ${bestStocks.length} saved`)
 }
 
 getEnrichedStockData()
