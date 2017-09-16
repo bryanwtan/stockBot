@@ -24,21 +24,11 @@ module.exports.stringify = obj => JSON.stringify(obj, null, '  ')
 
 module.exports.applyType = value => {
 	const _ = require('lodash')
-	const check = require('./typeCheck.js')
-	const map = require('./typeMap.js')
+	const type = require('./stringTypeCheck.js')
 
-	const typedResult = _.reduce(check, (result, isType, type) => {
-		return isType ? map[type](value) : result
+	const typedResult = _.reduce(type.check, (result, isType, knownType) => {
+		return isType ? type.apply[knownType](value) : result
 	})
 
 	return typedResult || value
 }
-
-module.exports.getInfo = s => ({
-	ticker: s.Ticker,
-	company: s.Company,
-	sector: s.Sector,
-	industry: s.Industry,
-	country: s.Country,
-	earnings: s.Earnings
-})
