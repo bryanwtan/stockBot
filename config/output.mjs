@@ -7,17 +7,17 @@ const getInfo = s => ({
 	earnings: s.Earnings
 })
 
-module.exports = [
+export default [
 	{
 		file: 'info',
 		data: 'best',
 		func: d => d.map(s => getInfo(s))
 	},
-	// {
-	// 	file: 'original',
-	// 	data: 'original',
-	// 	func: d => d
-	// },
+	{
+		file: 'original',
+		data: 'original',
+		func: d => d
+	},
 	{
 		file: 'best',
 		data: 'best',
