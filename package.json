@@ -1,15 +1,15 @@
 {
-	"name": "stockbot",
-	"version": "1.0.0",
-	"description": "gainz",
-	"main": "server.js",
-	"scripts": {
-		"start": "node --experimental-modules app.mjs"
-	},
-	"author": "",
-	"license": "ISC",
-	"dependencies": {
-		"lodash": "^4.17.5",
-		"x-ray": "^2.3.2"
-	}
+  "name": "stockbot",
+  "version": "1.0.0",
+  "description": "gainz",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --experimental-modules app.mjs"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.5",
+    "x-ray": "^2.3.2"
+  }
 }

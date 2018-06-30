@@ -1,29 +1,29 @@
 const notes = {
-	// trades should only execute when (desired - current) > $1000
-	// maintain a certain amount of liquidity
+  // trades should only execute when (desired - current) > $1000
+  // maintain a certain amount of liquidity
 
-	// initial buy weight correlates to rank, hold all tickers in the top list
-	initialization: 'buyToOpen',
+  // initial buy weight correlates to rank, hold all tickers in the top list
+  initialization: 'buyToOpen',
 
-	entersTopList: 'buyToOpen',
-	exitsTopList: 'sellToClose',
+  entersTopList: 'buyToOpen',
+  exitsTopList: 'sellToClose',
 
-	// need to blacklist tickers that have been closed out
+  // need to blacklist tickers that have been closed out
 
-	// this might not help at all if weights are self managed
-	positiveInsiderInterest: 'increasePosition',
-	negativeInsiderInterest: 'decreasePosition',
+  // this might not help at all if weights are self managed
+  positiveInsiderInterest: 'increasePosition',
+  negativeInsiderInterest: 'decreasePosition',
 
-	// full override granted to higher ranked triggers
-	lowVolumePriceSpike: 'sellToClose',
-	lowVolumePriceDrop: 'increasePosition',
-	highVolumePriceSpike: 'hold',
-	highVolumePriceDrop: 'sellToClose'
+  // full override granted to higher ranked triggers
+  lowVolumePriceSpike: 'sellToClose',
+  lowVolumePriceDrop: 'increasePosition',
+  highVolumePriceSpike: 'hold',
+  highVolumePriceDrop: 'sellToClose'
 }
 
 const trigger = {
-	buyToOpen: [buyChecks, buyAdjustments],
-	sellToClose: [sellChecks, sellAdjustments]
+  buyToOpen: [buyChecks, buyAdjustments],
+  sellToClose: [sellChecks, sellAdjustments]
 }
 
 const checks = {}
