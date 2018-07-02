@@ -1,3 +1,7 @@
+import _ from 'lodash'
+
+import { applyType } from '../utils/dataTypes'
+
 const getInfo = s => ({
   ticker: s.Ticker,
   company: s.Company,
@@ -10,17 +14,14 @@ const getInfo = s => ({
 export default [
   {
     file: 'info',
-    data: 'best',
     func: d => d.map(s => getInfo(s))
   },
   {
     file: 'original',
-    data: 'original',
     func: d => d
   },
   {
     file: 'best',
-    data: 'best',
-    func: d => d
+    func: d => d.map(s => _.mapValues(s, v => applyType(v)))
   }
 ]
